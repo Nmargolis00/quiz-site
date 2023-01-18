@@ -54,7 +54,7 @@ startTimer();
 }
 
 
-
+//Make time deduct when you get an answer wrong if (answer != correctAnswer){secondsLeft - 5}
 function startTimer(){
     console.log(timerInterval)
     timerInterval = setInterval(function() {
