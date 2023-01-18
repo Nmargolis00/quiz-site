@@ -29,18 +29,28 @@ var questions = [
         question: "Commonly used data types do not include:",
         answers: ["strings", "booleans", "alert", "numbers"],
         correctAnswer: "alert",
-    }, {
+        userAnswer: null,
+    }, 
+    
+    {
         question: "The condition in an if/else statement is enclosed with _",
         answers: ["quotes", "curly brackets", "parenthesis", "square brackets"],
         correctAnswer: "parenthesis",
-    }, {
+        userAnswer: null,
+    }, 
+    
+    {
         question: "Arrays in javascript can be used to store:",
         answers: ["number and strings", "other arrays", "booleans", "all of the above"],
         correctAnswer: "all of the above",
-    }, {
+        userAnswer: null,
+    }, 
+    
+    {
         question: "String values must be enclosed within _ when being assigned to variables.",
         answers: ["commas", "curly brackets", "quotes", "parenthesis"],
         correctAnswer: "quotes",
+        userAnswer: null,
     },
 
 ]
