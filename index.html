@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Javascript Quiz</h1>
+        <div id="highscores">Highscores</div>
+        <div>
+            <p>Time: <span id="time">100</span></p>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div class="start-quiz">
+                <h2>Let's See How Smart You Are</h2>
+                <button class="button" id="start">Start</button>
+            </div>
+            <br>
+            <div class="question-section hide">
+                <h2 id="question-display"></h2>
+            
+            <br>
+            <div id="answers">
+                <button class="answer" id="answer-A"></button>
+                <button class="answer" id="answer-B"></button>
+                <button class="answer" id="answer-C"></button>
+                <button class="answer" id="answer-D"></button>
+            </div>
+            </div>
+            <div class="end-screen hide">
+                <h4>Quiz Complete!
+                </h4>
+                <p><span id="total-score"></span></p>
+                <br>
+                <form id="scoreboard">
+                    <p>Give me your initials. Give them to me now; </p>
+                    <input type="text" id="initials">
+                    <button class="button" id="submit">Submit</button>
+                </form>
+            </div>
+            <div class="highscore-section hide">
+                <h4>Highscores</h4>
+                <form id="score-form">
+                    <ol id="past-scores"></ol>
+                    <div id="score-buttons">
+                        <button id="return">Return to Start</button>
+                        <button id="reset">Rest</button>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+</body>
+<script src="./script.js"></script>
+
+</html>

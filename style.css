@@ -1,0 +1,17 @@
+.hide {
+    display: none;
+}
+.answer {
+height: 30px;
+width: 80px;
+margin: 5px;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: left;
+   
+    
+}
