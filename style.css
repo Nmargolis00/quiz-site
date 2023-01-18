@@ -3,8 +3,14 @@
 }
 .answer {
 height: 30px;
-width: 80px;
+width: 500px;
 margin: 5px;
+background-color: blueviolet;
+color: white;
+}
+
+button:hover {
+opacity: 0.5;
 }
 
 #answers {
