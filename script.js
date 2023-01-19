@@ -80,11 +80,12 @@ var currentQuestion = questions[currentQuestionIndex];
 questionDisplay.innerText = currentQuestion.question;
 for (let index = 0; index < currentQuestion.answers.length; index++) {
     const element = currentQuestion.answers[index];
+    var id = "answer" + index;
     
-    var options = document.getElementById("answer");
+    var options = document.getElementById(id);
     console.log(options);
     // Not grabbing correct answers
-    options.textContent = currentQuestion.answers;
+    options.textContent = currentQuestion.answers[index];
 }
 
 }
