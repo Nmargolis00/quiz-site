@@ -19,38 +19,35 @@ const startButton = document.querySelector("#start");
 const timerEL = document.querySelector("#time");
 var secondsLeft = 100;
 var timerInterval;
-var questionDisplay= document.querySelector("#question-display")
+var questionDisplay= document.querySelector("#question-display");
+var score;
 
 // if id do a #, if it is a class you need .class
 
 //declare variables
 var questions = [
     {
-        question: "Commonly used data types do not include:",
-        answers: ["strings", "booleans", "alert", "numbers"],
-        correctAnswer: "alert",
-        userAnswer: null,
+        question: "Is water wet?",
+        answers: ["Yes", "No"],
+        correctAnswer: "Yes",
     }, 
     
     {
         question: "The condition in an if/else statement is enclosed with _",
         answers: ["quotes", "curly brackets", "parenthesis", "square brackets"],
         correctAnswer: "parenthesis",
-        userAnswer: null,
     }, 
     
     {
         question: "Arrays in javascript can be used to store:",
         answers: ["number and strings", "other arrays", "booleans", "all of the above"],
         correctAnswer: "all of the above",
-        userAnswer: null,
     }, 
     
     {
         question: "String values must be enclosed within _ when being assigned to variables.",
         answers: ["commas", "curly brackets", "quotes", "parenthesis"],
         correctAnswer: "quotes",
-        userAnswer: null,
     },
 
 ]
@@ -66,7 +63,6 @@ startTimer();
 
 //Make time deduct when you get an answer wrong if (answer != correctAnswer){secondsLeft - 5}
 function startTimer(){
-    console.log(timerInterval)
     timerInterval = setInterval(function() {
         secondsLeft--;
         timerEL.textContent = secondsLeft + " seconds until you lose";
@@ -77,16 +73,18 @@ function startTimer(){
     },1000);
 }
 
-
+//could create element for each answer
 var currentQuestionIndex = 0;
 function displayQuestions(){
 var currentQuestion = questions[currentQuestionIndex];
 questionDisplay.innerText = currentQuestion.question;
 for (let index = 0; index < currentQuestion.answers.length; index++) {
     const element = currentQuestion.answers[index];
-    //Figure out how to get answers to display and give them a color and make it change when you hover
-    var options = document.getElementById("answer" + index);
-    options.textContent = element;
+    
+    var options = document.getElementById("answer");
+    console.log(options);
+    // Not grabbing correct answers
+    options.textContent = currentQuestion.answers;
 }
 
 }
@@ -95,5 +93,5 @@ function quizEnd(){
 
 }
 
-
+//addeverntlistener for answers?
 startButton.addEventListener("click", startQuiz)
