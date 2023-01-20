@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Take A Quiz!</title>
+</head>
+<body id="root">
+    <header>
+        <h2 id="highscore"></h2>
+        <h2 id="timer"></h2>
+    </header>
+
+    <div>
+        <h2>Let's See How Smart You Are</h2>
+        <button id="start-btn">Start</button>
+
+    </div>
+
+    <div class="quiz-box">
+        <h3 id="question"></h3>
+        <ul id="answers"></ul>
+
+    </div>
+
+    <div id = "end-game" class="end-screen hide">
+         <h4>Quiz Complete!</h4>
+         <!-- can we make the p tag on js? I think so -->
+         <br>
+         
+         <form id="scoreboard">
+            <!-- create another p tag and include: Give me your initials. Give them to me NOW -->
+            <button id="submit">Submit</button>
+         </form>
+    </div>
+
+    <div class="highscore-section hide">
+        <h5>Highscores</h5>
+
+    </div>
+    <!-- <div class="end-screen hide">
+        <h4>Quiz Complete!
+        </h4>
+        <p><span id="total-score"></span></p>
+        <br>
+        <form id="scoreboard">
+            <p>Give me your initials. Give them to me now; </p>
+            <input type="text" id="initials">
+            <button class="button" id="submit">Submit</button>
+        </form>
+    </div>
+    <div class="highscore-section hide">
+        <h4>Highscores</h4>
+        <form id="score-form">
+            <ol id="past-scores"></ol>
+            <div id="score-buttons">
+                <button id="return">Return to Start</button>
+                <button id="reset">Rest</button>
+
+            </div>
+        </form>
+    </div> -->
+
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./script2.js"></script>
+</html>

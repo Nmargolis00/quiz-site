@@ -17,6 +17,12 @@ const startEl = document.querySelector(".start-quiz");
 const questionContainer = document.querySelector(".question-section");
 const startButton = document.querySelector("#start");
 const timerEL = document.querySelector("#time");
+
+//Do I really need to do a query selector or should I just rebuild this with create element
+const answerButton0 = document.querySelector("#answer0");
+const answerButton1 = document.querySelector("#answer1");
+const answerButton2 = document.querySelector("#answer2");
+const answerButton3 = document.querySelector("#answer3");
 var secondsLeft = 100;
 var timerInterval;
 var questionDisplay= document.querySelector("#question-display");
@@ -28,7 +34,7 @@ var score;
 var questions = [
     {
         question: "Is water wet?",
-        answers: ["Yes", "No"],
+        answers: ["Yes", "No", "Fish live in water", "What is water?"],
         correctAnswer: "Yes",
     }, 
     
@@ -83,10 +89,12 @@ for (let index = 0; index < currentQuestion.answers.length; index++) {
     var id = "answer" + index;
     
     var options = document.getElementById(id);
-    console.log(options);
-    // Not grabbing correct answers
+    //console.log(options);
+    
     options.textContent = currentQuestion.answers[index];
 }
+
+//You will need local storage to store wins and losses if you need to do that
 
 }
 
@@ -94,5 +102,31 @@ function quizEnd(){
 
 }
 
-//addeverntlistener for answers?
-startButton.addEventListener("click", startQuiz)
+
+startButton.addEventListener("click", startQuiz);
+//todoList.addEventListener("click", function(event) {
+//   var element = event.target;
+
+//   // Checks if element is a button
+//   if (element.matches("button") === true) {
+//     // Get its data-index value and remove the todo element from the list
+//     var index = element.parentElement.getAttribute("data-index");
+//     todos.splice(index, 1);
+
+//     // Store updated todos in localStorage, re-render the list
+//     storeTodos();
+//     renderTodos();
+//   }
+// });
+
+
+//addeverntlistener for answers
+
+answerButton.addEventListener("click", function(event){
+if (answers.matches("correctAnswer") === true){
+    score++;
+} 
+
+
+
+});
