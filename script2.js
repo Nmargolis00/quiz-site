@@ -1,5 +1,7 @@
 //Global Variables
 rootEL = $('#root');
+//Create for rest of IDs
+
 
 //Object of questions, answers and correct answer
 
@@ -24,3 +26,17 @@ let questions = [
     
  
 ]
+
+//Create questions and answers through a for loop using the children of various parts of the HTML
+
+//start function and timer function
+
+//Store input similar to the shopping list activity
+
+//Create if statement for right and wrong answer
+
+//Store results
+
+//After quiz is done, local storage to show highscore and prompt to enter initials
+
+//Button to reset quiz
