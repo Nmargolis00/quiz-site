@@ -94,6 +94,7 @@ for (let index = 0; index < currentQuestion.answers.length; index++) {
 }
 
 function quizEnd(){
+    
 
 }
 

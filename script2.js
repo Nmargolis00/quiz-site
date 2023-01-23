@@ -1,15 +1,15 @@
 //Global Variables
 rootEL = $('#root');
-highscoreEL = $('<h2>');
+highscoreEL = $('.highscore-section');
 questionEl = $('#question');
 answerDisplayEL = $('#answers');
-scoreboardEL = $('#scoreboard');
+scoreboardEL = $('#victory-board');
 var startEl = $('#start-btn');
-questionContainer = $('.question-section');
+let questionContainer = document.querySelector('.question-section');
 
 let button = document.querySelector("#start-btn");
 
-timerEl = $('#time');
+const timerEl = document.querySelector('#time');
 var secondsLeft = 100;
 var score = 0;
 let indexQuestion = 0;
@@ -73,6 +73,7 @@ function showQuestion() {
       answerDisplayEL.append(choicesEl);
       startTimer();
       
+      
 
 //Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
      }       
@@ -88,8 +89,8 @@ function checkAnswer(event) {
         let userSelection = event.target.textContent.trim();
         let youDidIt = questions[indexQuestion].correctAnswer;
         
-        console.log(userSelection);
-        console.log(youDidIt);
+        // console.log(userSelection);
+        // console.log(youDidIt);
 
         if (userSelection === youDidIt) {
             score++;
@@ -109,27 +110,69 @@ function checkAnswer(event) {
 // Need a function for the end of the quiz to stop displaying questions and show high score and initials
 
 
-
 function startTimer(){
-    let timerInterval = setInterval(function() {
+    let timerInterval = setInterval(function(){
         secondsLeft--;
-        timerEl.innerHTML = secondsLeft + " seconds until you lose";
-        if(secondsLeft === 0) {
+        timerEl.textContent = secondsLeft + " seconds until you lose";
+        if(secondsLeft <= 1) {
             clearInterval(timerInterval);
-            // quizEnd();
+            quizEnd ();
         }
-    },1000);
+    },  1000);
+}
+//Timer goes down in increments of 4 and does not stop
+
+
+
+
+//Quiz End Function
+
+function quizEnd(){
+    questionContainer.hide();
+    timerEl.hide();
+    highscoreEL.unhide();
+    finalPage ();
+  }
+
+  //Why is this one not working?
+
+
+
+function finalPage(){
+    initials = prompt("Please enter your initials");
+    var letters = /^[A-Za-z]+$/;
+        if(inputtxt.value.match(letters))
+     {
+      return true;
+     }
+        else
+     {
+     alert("Please enter letters only");
+     return false;
+     
+    
+     localStorage.setItem("initials", JSON.stringify(initials))
+
+     scoreboardEL = $(`<li> ${initials} </li>`)
+     }
+    //  var choicesEl = $(
+    //     `<li> <button class = "answer-button"> ${currentQuestion.answers[i]} </button> `
+    //   );
+      
+
+// store initials and highscore (change score to a %) on local storage
+// call initals and highscore for a list
+// rank by highest number at top and lowest at bottom
+// prompt "would you like to play again? if yes reset page"
+
+
 }
 
 
 
-//Create questions and answers through a for loop using the children of various parts of the HTML. You will need to compare to the activities
 
-//start function and timer function. You already have this so that makes it a little easier
 
-//Store input similar to the shopping list activity
 
-//Create if statement for right and wrong answer
 
 //Store results
 
