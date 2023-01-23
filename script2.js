@@ -1,8 +1,6 @@
 //Global Variables
 rootEL = $('#root');
 highscoreEL = $('<h2>');
-timerEL = $('<h3>');
-timerEL = $('<p>');
 questionEl = $('#question');
 answerDisplayEL = $('#answers');
 scoreboardEL = $('#scoreboard');
@@ -11,8 +9,9 @@ questionContainer = $('.question-section');
 
 let button = document.querySelector("#start-btn");
 
-let secondsLeft = 100;
-let timerInterval = 5;
+var timerEl = $('#time')
+var secondsLeft = 100;
+let timerInterval = 1;
 var score = 0;
 let indexQuestion = 0;
 //Create for rest of IDs
@@ -43,10 +42,11 @@ let questions = [
 ]
 
 //Setting up page
-    highscoreEL.text('Highscore');
-    rootEL.append(highscoreEL);
-    timerEL.text('Timer');
-    highscoreEL.append(timerEL);
+    // highscoreEL.text('Highscore');
+    // rootEL.append(highscoreEL);
+    
+    // highscoreEL.append(timerEL);
+   
   
 
 // Start the game
@@ -72,6 +72,7 @@ function showQuestion() {
       );
       
       answerDisplayEL.append(choicesEl);
+      startTimer();
 
 //Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
      }       
@@ -112,10 +113,10 @@ function checkAnswer(event) {
 function startTimer(){
     timerInterval = setInterval(function() {
         secondsLeft--;
-        timeEL.textContent = secondsLeft + " seconds until you lose";
+        timerEL.textContent = secondsLeft + " seconds until you lose";
         if(secondsLeft === 0) {
             clearInterval(timerInterval);
-            quizEnd();
+            // quizEnd();
         }
     },1000);
 }
