@@ -9,9 +9,8 @@ questionContainer = $('.question-section');
 
 let button = document.querySelector("#start-btn");
 
-var timerEl = $('#time')
+const timerEl = document.querySelector('#time');
 var secondsLeft = 100;
-let timerInterval = 1;
 var score = 0;
 let indexQuestion = 0;
 //Create for rest of IDs
@@ -73,10 +72,12 @@ function showQuestion() {
       
       answerDisplayEL.append(choicesEl);
       startTimer();
+      
 
 //Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
      }       
     }
+    
 }
 
 
@@ -84,7 +85,7 @@ function showQuestion() {
 
 function checkAnswer(event) {
 
-        let userSelection = event.target.textContent;
+        let userSelection = event.target.textContent.trim();
         let youDidIt = questions[indexQuestion].correctAnswer;
         
         console.log(userSelection);
@@ -102,18 +103,17 @@ function checkAnswer(event) {
         showQuestion();
         console.log(score);
      
-//Why is it not clearing previous answers
+
     }
 
 // Need a function for the end of the quiz to stop displaying questions and show high score and initials
 
 
-// Timer Function, still need to make more time drop off if answer is wrong
 
 function startTimer(){
-    timerInterval = setInterval(function() {
+    let timerInterval = setInterval(function() {
         secondsLeft--;
-        timerEL.textContent = secondsLeft + " seconds until you lose";
+        timerEL.innerHTML = secondsLeft + " seconds until you lose";
         if(secondsLeft === 0) {
             clearInterval(timerInterval);
             // quizEnd();
