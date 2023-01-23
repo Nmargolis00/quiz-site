@@ -31,7 +31,7 @@ var score;
 // if id do a #, if it is a class you need .class
 
 //declare variables
-var questions = [
+let questions = [
     {
         question: "Is water wet?",
         answers: ["Yes", "No", "Fish live in water", "What is water?"],
@@ -39,23 +39,18 @@ var questions = [
     }, 
     
     {
-        question: "The condition in an if/else statement is enclosed with _",
-        answers: ["quotes", "curly brackets", "parenthesis", "square brackets"],
-        correctAnswer: "parenthesis",
+        question: "How far is the moon from earth?",
+        answers: ["At least 12 miles", "Red", "The Earth is Flat", "What is a moon?"],
+        correctAnswer: "At least 12 miles",
     }, 
     
     {
-        question: "Arrays in javascript can be used to store:",
-        answers: ["number and strings", "other arrays", "booleans", "all of the above"],
-        correctAnswer: "all of the above",
+        question: "What song did Shrek turn from a banger into a super-banger?",
+        answers: ["Before He Cheats by Kelly Clarkson", "I'm a Believer by Smash Mouth", "Get Low by Little John", "Toxic by Brittany Spears"],
+        correctAnswer: "I'm a Believer by Smash Mouth",
     }, 
     
-    {
-        question: "String values must be enclosed within _ when being assigned to variables.",
-        answers: ["commas", "curly brackets", "quotes", "parenthesis"],
-        correctAnswer: "quotes",
-    },
-
+ 
 ]
 
 

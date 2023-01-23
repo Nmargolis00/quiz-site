@@ -1,5 +1,18 @@
 //Global Variables
 rootEL = $('#root');
+highscoreEL = $('<h2>');
+timerEL = $('<h3>');
+timerEL = $('<p>');
+questionEl = $('#question');
+answerEL = $('#answers');
+scoreboardEL = $('#scoreboard');
+
+let button = document.querySelector("#start-btn");
+
+let secondsLeft = 100;
+let timerInterval;
+let score;
+let indexQuestion = 0;
 //Create for rest of IDs
 
 
@@ -27,9 +40,59 @@ let questions = [
  
 ]
 
-//Create questions and answers through a for loop using the children of various parts of the HTML
+//Setting up page
+    highscoreEL.text('Highscore');
+    rootEL.append(highscoreEL);
+    timerEL.text('Timer');
+    highscoreEL.append(timerEL);
+  
 
-//start function and timer function
+// Start the game
+
+function startQuiz() {
+    questionContainer.classList.remove("hide");
+    startEl.classList.add("hide");
+    startTimer ();
+
+    if (indexQuestion < questions.length){
+        let questionNumber = indexQuestion + 1;
+        questionEl.text("Question#" + questionNumber + ":" + `${questions[indexQuestion].question}`);
+    }
+
+    let currentQuestion = questions[indexQuestion];
+    answerEl.html("");
+
+    for (let index = 0; index < currentQuestion.choices.length; index++) {
+        let choicesEl = $(`<li id="listItem> <button>${currentQuestion.choices[index]}</button> </li>`);
+
+        answerEl.append(choicesEl);
+        
+
+        
+    }
+
+}
+//****** CAN YOU REPLACE INDEXQUESTION WITH 0 AND HAVE IT STILL WORK? */
+
+
+
+
+// Timer Function, still need to make more time drop off if answer is wrong
+
+function startTimer(){
+    timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEL.textContent = secondsLeft + " seconds until you lose";
+        if(secondsLeft === 0) {
+            clearInterval(timerInterval);
+            quizEnd();
+        }
+    },1000);
+}
+
+//Create questions and answers through a for loop using the children of various parts of the HTML. You will need to compare to the activities
+
+//start function and timer function. You already have this so that makes it a little easier
 
 //Store input similar to the shopping list activity
 
