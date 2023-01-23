@@ -7,21 +7,27 @@
     <link rel="stylesheet" href="./style.css">
     <title>Take A Quiz!</title>
 </head>
+
+<header>
+    <h2 id="highscore"></h2>
+    <h2 id="timer"></h2>
+    <p id="time"></p>
+</header>
+
 <body id="root">
-    <header>
-        <h2 id="highscore"></h2>
-        <h2 id="timer"></h2>
-        <p id="time"></p>
-    </header>
+
 
     <div>
         <h2>Let's See How Smart You Are</h2>
-        <button id="start-btn">Start</button>
-
+        <br>
+        <button class = "button" id="start-btn">Start</button>
+        <br>
     </div>
 
     <div class="quiz-box">
-        <h3 id="question"></h3>
+        <br>
+        <h3 id="question" class="question-section"></h3>
+        <br>
         <ul id="answers"></ul>
 
     </div>
@@ -31,6 +37,8 @@
          <!-- can we make the p tag on js? I think so -->
          <br>
          
+
+
          <form id="scoreboard">
             <!-- create another p tag and include: Give me your initials. Give them to me NOW -->
             <button id="submit">Submit</button>

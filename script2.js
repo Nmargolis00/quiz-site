@@ -4,8 +4,10 @@ highscoreEL = $('<h2>');
 timerEL = $('<h3>');
 timerEL = $('<p>');
 questionEl = $('#question');
-answerEL = $('#answers');
+answerDisplayEL = $('#answers');
 scoreboardEL = $('#scoreboard');
+startEl = $('#start-btn');
+questionContainer = $('.question-section');
 
 let button = document.querySelector("#start-btn");
 
@@ -49,30 +51,51 @@ let questions = [
 
 // Start the game
 
-function startQuiz() {
+function hideStart(event) {
+    event.preventDefault;
     questionContainer.classList.remove("hide");
     startEl.classList.add("hide");
+    startQuiz ();
     startTimer ();
+}
+
+
+function startQuiz() {
+   
 
     if (indexQuestion < questions.length){
         let questionNumber = indexQuestion + 1;
-        questionEl.text("Question#" + questionNumber + ":" + `${questions[indexQuestion].question}`);
+        questionEl.text("Question: " + questionNumber + ": " + `${questions[indexQuestion].question}`);
     }
 
     let currentQuestion = questions[indexQuestion];
-    answerEl.html("");
 
-    for (let index = 0; index < currentQuestion.choices.length; index++) {
-        let choicesEl = $(`<li id="listItem> <button>${currentQuestion.choices[index]}</button> </li>`);
 
-        answerEl.append(choicesEl);
-        
+    answerDisplayEL.innerHTML = "";
+
+    for (var i = 0; i < currentQuestion.answers.length; i++) {
+      var choicesEl = $(
+        '<li> <button> ${questions[indexQuestion].answers} </button> </li>'
+      );
+      
+      answerDisplayEL.append(choicesEl);
+
+//We need to grab appropriate part from Object
+
+    }
+  
 
         
     }
 
+// Function to check answer
+
+function checkAnswer(event) {
+    event.preventDefault;
+
+        let userSelection = event.target.textContent;
+        let youDidIt = questions[indexQuestion].correctAnswer;
 }
-//****** CAN YOU REPLACE INDEXQUESTION WITH 0 AND HAVE IT STILL WORK? */
 
 
 
@@ -90,6 +113,8 @@ function startTimer(){
     },1000);
 }
 
+
+
 //Create questions and answers through a for loop using the children of various parts of the HTML. You will need to compare to the activities
 
 //start function and timer function. You already have this so that makes it a little easier
@@ -103,3 +128,7 @@ function startTimer(){
 //After quiz is done, local storage to show highscore and prompt to enter initials
 
 //Button to reset quiz
+
+
+button.addEventListener("click", startQuiz);
+answerDisplayEL.addEventListener("click", checkAnswer);
