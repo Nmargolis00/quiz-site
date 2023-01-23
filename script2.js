@@ -9,7 +9,7 @@ questionContainer = $('.question-section');
 
 let button = document.querySelector("#start-btn");
 
-const timerEl = document.querySelector('#time');
+timerEl = $('#time');
 var secondsLeft = 100;
 var score = 0;
 let indexQuestion = 0;
@@ -113,7 +113,7 @@ function checkAnswer(event) {
 function startTimer(){
     let timerInterval = setInterval(function() {
         secondsLeft--;
-        timerEL.innerHTML = secondsLeft + " seconds until you lose";
+        timerEl.innerHTML = secondsLeft + " seconds until you lose";
         if(secondsLeft === 0) {
             clearInterval(timerInterval);
             // quizEnd();
