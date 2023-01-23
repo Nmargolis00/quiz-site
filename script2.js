@@ -6,14 +6,14 @@ timerEL = $('<p>');
 questionEl = $('#question');
 answerDisplayEL = $('#answers');
 scoreboardEL = $('#scoreboard');
-startEl = $('#start-btn');
+var startEl = $('#start-btn');
 questionContainer = $('.question-section');
 
 let button = document.querySelector("#start-btn");
 
 let secondsLeft = 100;
-let timerInterval;
-let score;
+let timerInterval = 5;
+var score = 0;
 let indexQuestion = 0;
 //Create for rest of IDs
 
@@ -51,21 +51,15 @@ let questions = [
 
 // Start the game
 
-function hideStart(event) {
-    event.preventDefault;
-    startEl.hide(); //This function isn't working
-    startQuiz();
-}
 
-
-function startQuiz() {
+function showQuestion() {
    
-    //Need to hide start button
+    startEl.addClass("hide");
 
     if (indexQuestion < questions.length){
         let questionNumber = indexQuestion + 1;
         questionEl.text("Question: " + questionNumber + ": " + `${questions[indexQuestion].question}`);
-    }
+    
 
     let currentQuestion = questions[indexQuestion];
 
@@ -74,30 +68,43 @@ function startQuiz() {
 
     for (var i = 0; i < currentQuestion.answers.length; i++) {
       var choicesEl = $(
-        `<li> <button class = "answer-button"> ${questions[indexQuestion].answers[i]} </button> </li>`
+        `<li> <button class = "answer-button"> ${currentQuestion.answers[i]} </button> </li>`
       );
       
       answerDisplayEL.append(choicesEl);
 
-//We need to grab appropriate part from Object
-
+//Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
+     }       
     }
-  
-
-        
-    }
+}
 
 
 // Function to check answer
 
 function checkAnswer(event) {
-    event.preventDefault;
 
         let userSelection = event.target.textContent;
         let youDidIt = questions[indexQuestion].correctAnswer;
-}
+        
+        console.log(userSelection);
+        console.log(youDidIt);
 
+        if (userSelection = youDidIt) {
+            score++;
+            
+        } else {
+            secondsLeft = secondsLeft - 5;
+            
+        }
 
+        indexQuestion++;
+        showQuestion();
+        console.log(score);
+     
+//Why is it not clearing previous answers
+    }
+
+// Need a function for the end of the quiz to stop displaying questions and show high score and initials
 
 
 // Timer Function, still need to make more time drop off if answer is wrong
@@ -130,5 +137,5 @@ function startTimer(){
 //Button to reset quiz
 
 
-button.addEventListener("click", startQuiz);
-answerDisplayEL.addEventListener("click", checkAnswer);
+button.addEventListener("click", showQuestion);
+answerDisplayEL.on("click", checkAnswer);
