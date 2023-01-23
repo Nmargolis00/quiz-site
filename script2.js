@@ -64,7 +64,7 @@ function showQuestion() {
     let currentQuestion = questions[indexQuestion];
 
 
-    answerDisplayEL.innerHTML = "";
+    answerDisplayEL.empty();
 
     for (var i = 0; i < currentQuestion.answers.length; i++) {
       var choicesEl = $(
@@ -89,7 +89,7 @@ function checkAnswer(event) {
         console.log(userSelection);
         console.log(youDidIt);
 
-        if (userSelection = youDidIt) {
+        if (userSelection === youDidIt) {
             score++;
             
         } else {
