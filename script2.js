@@ -53,15 +53,14 @@ let questions = [
 
 function hideStart(event) {
     event.preventDefault;
-    questionContainer.classList.remove("hide");
-    startEl.classList.add("hide");
-    startQuiz ();
-    startTimer ();
+    startEl.hide(); //This function isn't working
+    startQuiz();
 }
 
 
 function startQuiz() {
    
+    //Need to hide start button
 
     if (indexQuestion < questions.length){
         let questionNumber = indexQuestion + 1;
@@ -75,7 +74,7 @@ function startQuiz() {
 
     for (var i = 0; i < currentQuestion.answers.length; i++) {
       var choicesEl = $(
-        '<li> <button> ${questions[indexQuestion].answers} </button> </li>'
+        `<li> <button class = "answer-button"> ${questions[indexQuestion].answers[i]} </button> </li>`
       );
       
       answerDisplayEL.append(choicesEl);
@@ -87,6 +86,7 @@ function startQuiz() {
 
         
     }
+
 
 // Function to check answer
 

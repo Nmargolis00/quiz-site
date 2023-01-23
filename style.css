@@ -5,6 +5,8 @@ box-sizing: border-box;
 }
 
 
+
+
 .hide {
     display: none;
 }
@@ -16,8 +18,18 @@ background-color: blueviolet;
 color: white;
 }
 
+.answer-button{
+    background-color: rgb(59, 196, 196);
+    width: 200px;
+    font-size: large;
+    margin: 5px;
+}
+
+
+
 button:hover {
 opacity: 0.5;
+
 }
 
 #answers {
@@ -25,6 +37,12 @@ opacity: 0.5;
     flex-direction: column;
     justify-content: start;
     align-items: left;
-   
+    padding: 5px;
+    margin: 15px;
     
 }
+
+li {
+    list-style-type: upper-alpha;
+}
+
