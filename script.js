@@ -1,128 +1,215 @@
-//time function that subtracts time if answer is wrong
+//Global Variables
+rootEL = $('#root');
+highscoreEL = $('.highscore-section');
+questionEl = $('#question');
+answerDisplayEL = $('#answers');
+scoreboardEL = $('#victory-board');
+var startEl = $('#start-btn');
+questionContainer = $('.quiz-box');
+timeBox = $('.time-box');
+finalEl = $('.end-screen');
+victoryEl = $('#victory-board');
+const finalScoreEl = document.querySelector('#score');
 
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
+let button = document.querySelector("#start-btn");
 
-
-const startEl = document.querySelector(".start-quiz");
-const questionContainer = document.querySelector(".question-section");
-const startButton = document.querySelector("#start");
-const timerEL = document.querySelector("#time");
-
-//Do I really need to do a query selector or should I just rebuild this with create element
-const answerButton0 = document.querySelector("#answer0");
-const answerButton1 = document.querySelector("#answer1");
-const answerButton2 = document.querySelector("#answer2");
-const answerButton3 = document.querySelector("#answer3");
+const timerEl = document.querySelector('#time');
 var secondsLeft = 100;
-var timerInterval;
-var questionDisplay= document.querySelector("#question-display");
-var score;
+let indexQuestion = 0;
+let timerInterval;
+//Create for rest of IDs
 
-// if id do a #, if it is a class you need .class
 
-//declare variables
+//Object of questions, answers and correct answer
+
 let questions = [
     {
         question: "Is water wet?",
         answers: ["Yes", "No", "Fish live in water", "What is water?"],
         correctAnswer: "Yes",
-    }, 
-    
+    },
+
     {
         question: "How far is the moon from earth?",
         answers: ["At least 12 miles", "Red", "The Earth is Flat", "What is a moon?"],
         correctAnswer: "At least 12 miles",
-    }, 
-    
+    },
+
     {
         question: "What song did Shrek turn from a banger into a super-banger?",
         answers: ["Before He Cheats by Kelly Clarkson", "I'm a Believer by Smash Mouth", "Get Low by Little John", "Toxic by Brittany Spears"],
         correctAnswer: "I'm a Believer by Smash Mouth",
-    }, 
-    
- 
+    },
+
+
 ]
 
+//Setting up page
+// highscoreEL.text('Highscore');
+// rootEL.append(highscoreEL);
 
-function startQuiz(){
-questionContainer.classList.remove("hide");
-startEl.classList.add("hide");
-displayQuestions();
-startTimer();
-}
+// highscoreEL.append(timerEL);
 
 
-//Make time deduct when you get an answer wrong if (answer != correctAnswer){secondsLeft - 5}
-function startTimer(){
-    timerInterval = setInterval(function() {
-        secondsLeft--;
-        timerEL.textContent = secondsLeft + " seconds until you lose";
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval);
-            quizEnd();
+
+// Start the game
+
+
+function showQuestion() {
+
+    startEl.addClass("hide");
+
+
+    if (indexQuestion < questions.length) {
+        let questionNumber = indexQuestion + 1;
+        questionEl.text("Question: " + questionNumber + ": " + `${questions[indexQuestion].question}`);
+
+
+        let currentQuestion = questions[indexQuestion];
+
+
+        answerDisplayEL.empty();
+
+        for (var i = 0; i < currentQuestion.answers.length; i++) {
+            var choicesEl = $(
+                `<li> <button class = "answer-button"> ${currentQuestion.answers[i]} </button> </li>`
+            );
+
+            answerDisplayEL.append(choicesEl);
+
+
+
+
+            //Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
         }
-    },1000);
+
+    }
+    startTimer();
 }
 
-//could create element for each answer
-var currentQuestionIndex = 0;
-function displayQuestions(){
-var currentQuestion = questions[currentQuestionIndex];
-questionDisplay.innerText = currentQuestion.question;
-for (let index = 0; index < currentQuestion.answers.length; index++) {
-    const element = currentQuestion.answers[index];
-    var id = "answer" + index;
+
+// Function to check answer
+
+function checkAnswer(event) {
+
+    if (timerEl <= 0 || indexQuestion === questions.length - 1) {
+        quizEnd();
+        clearTimeout(timerInterval);
+    } else {
+        showQuestion();
+    }
+
+    let userSelection = event.target.textContent.trim();
+    let youDidIt = questions[indexQuestion].correctAnswer;
+
+
+    // console.log(userSelection);
+    // console.log(youDidIt);
+
+    if (userSelection === youDidIt) {
+        secondsLeft = secondsLeft;
+
+    } else {
+        secondsLeft = secondsLeft - 5;
+
+    }
+
+    indexQuestion++;
+    showQuestion();
+
+    //if statement for when questions are done to stop the time. Could do it here or beginning of showQuestionse
+
+    //if indexquestion = questions.length {
+    // stop game
+
+    //let finalScore = secondsLeft
+
+}
+
+// Need a function for the end of the quiz to stop displaying questions and show high score and initials
+
+
+function startTimer() {
+    timerInterval = setInterval(function () {
+        secondsLeft--;
+        timerEl.textContent = secondsLeft + " seconds until you lose";
+        if (secondsLeft <= 0) {
+            quizEnd();
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
+
+
+
+//Quiz End Function
+// Go through and make sure js or jquery to make sure it matches
+function quizEnd() {
+    questionContainer.addClass("hide");
+    timerEl.classList.add("hide");
+    highscoreEL.removeClass("hide");
+    timeBox.addClass("hide");
+    finalEl.removeClass("hide");
+    //If it has hide on the HTML it would be removeClass instead
+    clearInterval(timerInterval);
+    finalPage();
+}
+
+//Why is this one not working?
+
+
+
+function finalPage(event) {
     
-    var options = document.getElementById(id);
-    //console.log(options);
-    
-    options.textContent = currentQuestion.answers[index];
+    initals = localStorage.getItem("initials");
+    finalScore = localStorage.getItem("secondsLeft");
+
+ 
+    console.log(initals);
+
+    finalScoreEl.textContent = ":" + secondsLeft
+  
+    // highscoreEL.textContent = secondsLeft + initials
+    //Need to create space to dispaly initials and score
+
+
+
+
+   
+    //This should show the initials and highscore
+    // Need to have page create a way to enter initials
+    //create object with initials and score store locally
+    //pull info from local machine and stringify it
+    //display initals and score by highest to lowest
+    //ask if they would like to play again
+   
 }
 
-//You will need local storage to store wins and losses if you need to do that
-
+function init(){
+    //show the leader board for the next round of games 
 }
 
-function quizEnd(){
-    
-
-}
-
-
-startButton.addEventListener("click", startQuiz);
-//todoList.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   // Checks if element is a button
-//   if (element.matches("button") === true) {
-//     // Get its data-index value and remove the todo element from the list
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-
-//     // Store updated todos in localStorage, re-render the list
-//     storeTodos();
-//     renderTodos();
-//   }
-// });
-
-
-//addeverntlistener for answers
-
-answerButton.addEventListener("click", function(event){
-if (answers.matches("correctAnswer") === true){
-    score++;
-} 
+// store initials and highscore (Keep score as seconds) on local storage
+// call initals and highscore for a list
+// rank by highest number at top and lowest at bottom
+// prompt "would you like to play again? if yes reset page"
 
 
 
-});
+
+
+
+
+
+
+
+//Store results
+
+//After quiz is done, local storage to show highscore and prompt to enter initials
+
+//Button to reset quiz
+
+
+button.addEventListener("click", showQuestion);
+answerDisplayEL.on("click", checkAnswer);
