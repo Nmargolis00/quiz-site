@@ -6,6 +6,7 @@ answerDisplayEL = $('#answers');
 scoreboardEL = $('#victory-board');
 var startEl = $('#start-btn');
 questionContainer = $('.quiz-box');
+timeBox = $('.time-box');
 
 let button = document.querySelector("#start-btn");
 
@@ -148,7 +149,8 @@ function startTimer(){
 function quizEnd(){
     questionContainer.addClass("hide");
     timerEl.classList.add("hide");
-    highscoreEL.removeClass("hide");
+    highscoreEL.removeClass("hide"); //Do we want this to happen here?
+    timeBox.addClass("hide");
     //If it has hide on the HTML it would be removeClass instead
     clearInterval(timerInterval);
     finalPage ();
@@ -162,6 +164,12 @@ function finalPage(){
     finalScore = secondsLeft;
     console.log(secondsLeft);
      
+// Need to have page create a way to enter initials
+//create object with initials and score store locally
+//pull info from local machine and stringify it
+//display initals and score by highest to lowest
+//ask if they would like to play again
+
     
      localStorage.setItem("initials", JSON.stringify(initials))
 
