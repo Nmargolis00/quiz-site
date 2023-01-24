@@ -13,6 +13,7 @@ const timerEl = document.querySelector('#time');
 var secondsLeft = 100;
 var score = 0;
 let indexQuestion = 0;
+let timerInterval;
 //Create for rest of IDs
 
 
@@ -71,12 +72,13 @@ function showQuestion() {
       );
       
       answerDisplayEL.append(choicesEl);
-      startTimer();
+      
       
       
 
 //Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
-     }       
+     }
+     startTimer();       
     }
     
 }
@@ -89,6 +91,9 @@ function checkAnswer(event) {
         let userSelection = event.target.textContent.trim();
         let youDidIt = questions[indexQuestion].correctAnswer;
         
+
+
+
         // console.log(userSelection);
         // console.log(youDidIt);
 
@@ -103,7 +108,13 @@ function checkAnswer(event) {
         indexQuestion++;
         showQuestion();
         console.log(score);
-     
+
+//if statement for when questions are done to stop the time. Could do it here or beginning of showQuestionse
+
+        //if indexquestion = questions.length {
+   // stop game
+        
+      //let finalScore = secondsLeft
 
     }
 
@@ -111,26 +122,26 @@ function checkAnswer(event) {
 
 
 function startTimer(){
-    let timerInterval = setInterval(function(){
+    timerInterval = setInterval(function(){
         secondsLeft--;
         timerEl.textContent = secondsLeft + " seconds until you lose";
-        if(secondsLeft <= 1) {
-            clearInterval(timerInterval);
+        if(secondsLeft <= 0) {
             quizEnd ();
         }
     },  1000);
 }
-//Timer goes down in increments of 4 and does not stop
 
 
 
 
 //Quiz End Function
-
+// Go through and make sure js or jquery to make sure it matches
 function quizEnd(){
-    questionContainer.hide();
+    questionContainer.addClass("hide");
     timerEl.hide();
     highscoreEL.unhide();
+    //If it has hide on the HTML it would be removeClass instead
+    clearInterval(timerInterval);
     finalPage ();
   }
 
@@ -160,7 +171,7 @@ function finalPage(){
     //   );
       
 
-// store initials and highscore (change score to a %) on local storage
+// store initials and highscore (Keep score as seconds) on local storage
 // call initals and highscore for a list
 // rank by highest number at top and lowest at bottom
 // prompt "would you like to play again? if yes reset page"
