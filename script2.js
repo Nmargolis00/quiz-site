@@ -150,9 +150,9 @@ function startTimer(){
 //Quiz End Function
 // Go through and make sure js or jquery to make sure it matches
 function quizEnd(){
-    questionContainer.classList.add("hide");
+    questionContainer.addClass("hide");
     timerEl.classList.add("hide");
-    highscoreEL.classlist.remove("hide");
+    highscoreEL.removeClass("hide");
     //If it has hide on the HTML it would be removeClass instead
     clearInterval(timerInterval);
     finalPage ();
@@ -164,6 +164,7 @@ function quizEnd(){
 
 function finalPage(){
     initials = prompt("Please enter your initials");
+    // Look at acitivities to see how you can enter on the webpage
     var letters = /^[A-Za-z]+$/;
         if(inputtxt.value.match(letters))
      {
