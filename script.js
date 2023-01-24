@@ -84,7 +84,7 @@ function showQuestion() {
         }
 
     }
-    startTimer();
+
 }
 
 
@@ -130,6 +130,7 @@ function checkAnswer(event) {
 
 
 function startTimer() {
+    showQuestion();
     timerInterval = setInterval(function () {
         secondsLeft--;
         timerEl.textContent = secondsLeft + " seconds until you lose";
@@ -211,5 +212,5 @@ function init(){
 //Button to reset quiz
 
 
-button.addEventListener("click", showQuestion);
+button.addEventListener("click", startTimer);
 answerDisplayEL.on("click", checkAnswer);
