@@ -173,15 +173,15 @@ function finalPage(event) {
     }
     console.log(initals);
 
-    finalScoreEl.textContent = secondsLeft
-    console.log(secondsLeft);
+    finalScoreEl.textContent = ":" + secondsLeft
+  
     // highscoreEL.textContent = secondsLeft + initials
     //Need to create space to dispaly initials and score
 
 
 
 
-    console.log(secondsLeft);
+   
     //This should show the initials and highscore
     // Need to have page create a way to enter initials
     //create object with initials and score store locally
@@ -192,13 +192,9 @@ function finalPage(event) {
 
 
 
-    localStorage.setItem("initials", JSON.stringify(initials))
-
-    scoreboardEL = $(`<li> ${initials} </li>`)
+   
 }
-//  var choicesEl = $(
-//     `<li> <button class = "answer-button"> ${currentQuestion.answers[i]} </button> `
-//   );
+
 
 
 // store initials and highscore (Keep score as seconds) on local storage
