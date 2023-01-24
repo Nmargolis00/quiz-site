@@ -94,11 +94,12 @@ function showQuestion() {
 function checkAnswer(event) {
 
         if (timerEl <= 0 || indexQuestion === questions.length){
-            clearInterval(timerInterval);
-        
+                quizEnd ();
+                clearTimeout(timerInterval);
         } else {
-               showQuestion(); 
+            showQuestion();
         }
+     
         let userSelection = event.target.textContent.trim();
         let youDidIt = questions[indexQuestion].correctAnswer;
         
