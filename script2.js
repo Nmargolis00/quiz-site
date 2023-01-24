@@ -5,13 +5,12 @@ questionEl = $('#question');
 answerDisplayEL = $('#answers');
 scoreboardEL = $('#victory-board');
 var startEl = $('#start-btn');
-questionContainer = $('.question-section');
+questionContainer = $('.quiz-box');
 
 let button = document.querySelector("#start-btn");
 
 const timerEl = document.querySelector('#time');
 var secondsLeft = 100;
-var score = 0;
 let indexQuestion = 0;
 let timerInterval;
 //Create for rest of IDs
@@ -93,7 +92,7 @@ function showQuestion() {
 
 function checkAnswer(event) {
 
-        if (timerEl <= 0 || indexQuestion === questions.length){
+        if (timerEl <= 0 || indexQuestion === questions.length - 1){
                 quizEnd ();
                 clearTimeout(timerInterval);
         } else {
@@ -104,13 +103,11 @@ function checkAnswer(event) {
         let youDidIt = questions[indexQuestion].correctAnswer;
         
 
-
-
         // console.log(userSelection);
         // console.log(youDidIt);
 
         if (userSelection === youDidIt) {
-            score++;
+            secondsLeft = secondsLeft;
             
         } else {
             secondsLeft = secondsLeft - 5;
@@ -119,7 +116,6 @@ function checkAnswer(event) {
 
         indexQuestion++;
         showQuestion();
-        console.log(score);
 
 //if statement for when questions are done to stop the time. Could do it here or beginning of showQuestionse
 
@@ -163,17 +159,8 @@ function quizEnd(){
 
 
 function finalPage(){
-    initials = prompt("Please enter your initials");
-    // Look at acitivities to see how you can enter on the webpage
-    var letters = /^[A-Za-z]+$/;
-        if(inputtxt.value.match(letters))
-     {
-      return true;
-     }
-        else
-     {
-     alert("Please enter letters only");
-     return false;
+    finalScore = secondsLeft;
+    console.log(secondsLeft);
      
     
      localStorage.setItem("initials", JSON.stringify(initials))
@@ -191,7 +178,7 @@ function finalPage(){
 // prompt "would you like to play again? if yes reset page"
 
 
-}
+
 
 
 
