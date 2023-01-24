@@ -5,7 +5,7 @@ questionEl = $('#question');
 answerDisplayEL = $('#answers');
 scoreboardEL = $('#victory-board');
 var startEl = $('#start-btn');
-let questionContainer = document.querySelector('.question-section');
+questionContainer = $('.question-section');
 
 let button = document.querySelector("#start-btn");
 
@@ -56,6 +56,11 @@ function showQuestion() {
    
     startEl.addClass("hide");
 
+//if statement for when questions are done to stop the time. Could do it here or beginning of showQuestionse
+
+        //if indexquestion = questions.length {
+   // stop game
+
     if (indexQuestion < questions.length){
         let questionNumber = indexQuestion + 1;
         questionEl.text("Question: " + questionNumber + ": " + `${questions[indexQuestion].question}`);
@@ -73,14 +78,14 @@ function showQuestion() {
       
       answerDisplayEL.append(choicesEl);
       
-      
+     
       
 
 //Use BACKTICKS to make it work and be sure to add in the index for the appropriate part of the object
      }
-     startTimer();       
+          
     }
-    
+    startTimer();
 }
 
 
@@ -88,6 +93,12 @@ function showQuestion() {
 
 function checkAnswer(event) {
 
+        if (timerEl <= 0 || indexQuestion === questions.length){
+            clearInterval(timerInterval);
+        
+        } else {
+               showQuestion(); 
+        }
         let userSelection = event.target.textContent.trim();
         let youDidIt = questions[indexQuestion].correctAnswer;
         
@@ -127,6 +138,7 @@ function startTimer(){
         timerEl.textContent = secondsLeft + " seconds until you lose";
         if(secondsLeft <= 0) {
             quizEnd ();
+            clearInterval(timerInterval);
         }
     },  1000);
 }
@@ -137,9 +149,9 @@ function startTimer(){
 //Quiz End Function
 // Go through and make sure js or jquery to make sure it matches
 function quizEnd(){
-    questionContainer.addClass("hide");
-    timerEl.hide();
-    highscoreEL.unhide();
+    questionContainer.classList.add("hide");
+    timerEl.classList.add("hide");
+    highscoreEL.classlist.remove("hide");
     //If it has hide on the HTML it would be removeClass instead
     clearInterval(timerInterval);
     finalPage ();
