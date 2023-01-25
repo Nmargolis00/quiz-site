@@ -2,7 +2,7 @@
 
 ## Description
 
-This project helped me to think through how to approach a problem and build it out with JavaScript. I utilized for loops, local storage, objects and query selectors to build the site
+This project helped me to think through how to approach a problem and build it out with JavaScript. I utilized for loops, local storage, objects and query selectors to build the site. I also learned that when you combine jquery and javascript it is super annoying to troubleshoot things
 
 
 ## Table of Contents (Optional)
