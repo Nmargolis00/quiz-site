@@ -5,6 +5,10 @@ box-sizing: border-box;
 }
 
 
+.leader-board {
+    list-style-type: upper-roman;
+}
+
 
 .hide {
     display: none;

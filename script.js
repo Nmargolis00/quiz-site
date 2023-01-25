@@ -9,7 +9,7 @@ var questionContainer = $('.quiz-box');
 var timeBox = $('.time-box');
 var finalEl = $('.end-screen');
 var victoryEl = $('#victory-board');
-const finalScoreEl = document.querySelector('#score');
+var finalScoreEl = document.querySelector('#score');
 var initialsEl = $('#initials');
 var initialsBtn = document.querySelector('#enter-initials');
 var playAgainBtn = document.querySelector('#play-again');
@@ -17,7 +17,7 @@ var displayBtn = document.querySelector('#display-scores');
 
 let button = document.querySelector("#start-btn");
 
-const timerEl = document.querySelector('#time');
+var timerEl = document.querySelector('#time');
 var secondsLeft = 100;
 let indexQuestion = 0;
 let timerInterval;
@@ -210,7 +210,7 @@ function displayScores(event){
 
     for (let index = 0; index < newScores.length; index++) {
         const element = `
-        <li class = "leaderboard"> ${newScores[index].initials} - ${newScores[index].finalScore} </li>
+        <li class = "leader-board"> ${newScores[index].initials} - ${newScores[index].finalScore} </li>
         `
         $("#victory-board").append(element);
         
