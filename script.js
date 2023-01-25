@@ -229,7 +229,7 @@ function playAgain (){
     indexQuestion = 0;
     secondsLeft = 100;
     timerEl.textContent = secondsLeft + " seconds until you lose";
-
+    highScoreEL.addClass("hide");
     questionContainer.removeClass("hide");
     timerEl.classList.remove("hide");
     
