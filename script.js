@@ -1,15 +1,19 @@
 //Global Variables
-rootEL = $('#root');
-highscoreEL = $('.highscore-section');
-questionEl = $('#question');
-answerDisplayEL = $('#answers');
-scoreboardEL = $('#victory-board');
+
+var highScoreEL = $('.highscore-section');
+var questionEl = $('#question');
+var answerDisplayEL = $('#answers');
+var scoreboardEL = $('#victory-board');
 var startEl = $('#start-btn');
-questionContainer = $('.quiz-box');
-timeBox = $('.time-box');
-finalEl = $('.end-screen');
-victoryEl = $('#victory-board');
+var questionContainer = $('.quiz-box');
+var timeBox = $('.time-box');
+var finalEl = $('.end-screen');
+var victoryEl = $('#victory-board');
 const finalScoreEl = document.querySelector('#score');
+var initialsEl = $('#initials');
+var initialsBtn = document.querySelector('#enter-initials');
+var playAgainBtn = document.querySelector('#play-again');
+var displayBtn = document.querySelector('#display-scores');
 
 let button = document.querySelector("#start-btn");
 
@@ -87,6 +91,19 @@ function showQuestion() {
 
 }
 
+// Timer Function
+function startTimer() {
+    showQuestion();
+    timerInterval = setInterval(function () {
+        secondsLeft--;
+        timerEl.textContent = secondsLeft + " seconds until you lose";
+        if (secondsLeft <= 0) {
+            quizEnd();
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
 
 // Function to check answer
 
@@ -117,29 +134,12 @@ function checkAnswer(event) {
     indexQuestion++;
     showQuestion();
 
-    //if statement for when questions are done to stop the time. Could do it here or beginning of showQuestionse
 
-    //if indexquestion = questions.length {
-    // stop game
 
-    //let finalScore = secondsLeft
 
 }
 
 // Need a function for the end of the quiz to stop displaying questions and show high score and initials
-
-
-function startTimer() {
-    showQuestion();
-    timerInterval = setInterval(function () {
-        secondsLeft--;
-        timerEl.textContent = secondsLeft + " seconds until you lose";
-        if (secondsLeft <= 0) {
-            quizEnd();
-            clearInterval(timerInterval);
-        }
-    }, 1000);
-}
 
 
 
@@ -149,33 +149,42 @@ function startTimer() {
 function quizEnd() {
     questionContainer.addClass("hide");
     timerEl.classList.add("hide");
-    highscoreEL.removeClass("hide");
+    
     timeBox.addClass("hide");
     finalEl.removeClass("hide");
     //If it has hide on the HTML it would be removeClass instead
     clearInterval(timerInterval);
-    finalPage();
+    finalScoreEl.textContent = ": " + secondsLeft;
+    
 }
 
-//Why is this one not working?
+
 
 
 
 function finalPage(event) {
+    event.preventDefault();
+    highScoreEL.removeClass("hide");
+
+    const initials = initialsEl.val().trim();
+
+    const storedScores = JSON.parse(localStorage.getItem("storedScores")) || [];
+
+    const initialsScore = {
+        initials: initials,
+        finalScore: secondsLeft,
+
+    }
     
-    initals = localStorage.getItem("initials");
-    finalScore = localStorage.getItem("secondsLeft");
+    storedScores.push(initialsScore);
+    localStorage.setItem("storedScores", JSON.stringify(storedScores));
 
  
-    console.log(initals);
+    console.log(initialsScore);
 
-    finalScoreEl.textContent = ":" + secondsLeft
-  
-    // highscoreEL.textContent = secondsLeft + initials
-    //Need to create space to dispaly initials and score
+    
 
-
-
+    
 
    
     //This should show the initials and highscore
@@ -186,23 +195,47 @@ function finalPage(event) {
     //ask if they would like to play again
    
 }
+function compareScores(a,b){
+    return b.score - a.score
 
-function init(){
-    //show the leader board for the next round of games 
 }
+function displayScores(event){
+    event.preventDefault();
+
+    highScoreEL.removeClass("hide");
+
+    let newScores = JSON.parse(window.localStorage.getItem("storedScores")) || [];
+
+    newScores.sort(compareScores);
+
+    for (let index = 0; index < newScores.length; index++) {
+        const element = `
+        <li class = "leaderboard"> ${newScores[index].initials} - ${newScores[index].finalScore} </li>
+        `
+        $("#victory-board").append(element);
+        
+    }
+}
+    //show the leader board for the next round of games 
+
 
 // store initials and highscore (Keep score as seconds) on local storage
 // call initals and highscore for a list
 // rank by highest number at top and lowest at bottom
 // prompt "would you like to play again? if yes reset page"
 
+function playAgain (){
+    clearInterval();
+    indexQuestion = 0;
+    secondsLeft = 100;
+    timerEl.textContent = secondsLeft + " seconds until you lose";
 
-
-
-
-
-
-
+    questionContainer.removeClass("hide");
+    timerEl.classList.remove("hide");
+    
+    timeBox.removeClass("hide");
+    finalEl.addClass("hide");
+}
 
 
 //Store results
@@ -214,3 +247,11 @@ function init(){
 
 button.addEventListener("click", startTimer);
 answerDisplayEL.on("click", checkAnswer);
+initialsBtn.addEventListener("click", finalPage);
+displayBtn.addEventListener("click", displayScores);
+playAgainBtn.addEventListener("click", playAgain);
+
+   
+
+    
+
